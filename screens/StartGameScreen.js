@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Ale
 
 import Card from '../components/Card';
 import Input from '../components/Input';
+import Number from '../components/Number';
 
 const StartGameScreen = (props) => {
 
@@ -14,11 +15,7 @@ const StartGameScreen = (props) => {
     const numInputHandler = (inputText) => {
         const inputRegex = new RegExp('(^$|[1-9]{1}|[0-9]{2})');
         if(!inputRegex.test(inputText)) {
-            Alert.alert(
-                'Invalid Number', 
-                'Allowed Numbers 1 - 99', 
-                [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
-            );
+            showAlert();
             return;
         };
         setEnteredNum(inputText);
@@ -29,19 +26,38 @@ const StartGameScreen = (props) => {
         setConfirmed(false);
     }
 
+    const showAlert = () => {
+        Alert.alert(
+            'Invalid Number', 
+            'Allowed Numbers 1 - 99', 
+            [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
+        );
+    }
+
     const confirmInputHandler = () => {
-        if(enteredNum === '') {
+        Keyboard.dismiss();
+        if(enteredNum === '' || !enteredNum || isNaN(enteredNum) ) {
+            showAlert();
             return;
         }
         setConfirmed(true);
-        setSelectedNum(Number.parseInt(enteredNum));
+        setSelectedNum(enteredNum);
         setEnteredNum('');
     }
 
     let confirmedOutput;
 
     if(confirmed) {
-        confirmedOutput = <Text>You Chosen: {selectedNum}</Text>
+        confirmedOutput = (
+            <Card style={styles.summaryContainer}>
+                <Text>Your Chosen Number</Text>
+                <Number number={selectedNum} />
+                <Button 
+                    title="start game"
+                    color="#f7287b"
+                    onPress={() => props.onStartGame(selectedNum)}/>
+            </Card>
+        );
     }
 
     return ( 
@@ -106,6 +122,11 @@ const styles = StyleSheet.create({
         width: 70,
         marginBottom: 20,
         textAlign: 'center'
+    },
+    summaryContainer: {
+        margin: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
  
