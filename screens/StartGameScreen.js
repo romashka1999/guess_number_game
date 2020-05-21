@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { Ionicons }from '@expo/vector-icons'
 
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Number from '../components/Number';
+import BodyText from '../components/BodyText';
+import FlatButton from '../components/FlatButton';
 
 const StartGameScreen = (props) => {
 
@@ -50,12 +53,12 @@ const StartGameScreen = (props) => {
     if(confirmed) {
         confirmedOutput = (
             <Card style={styles.summaryContainer}>
-                <Text>Your Chosen Number</Text>
+                <BodyText>Your Chosen Number</BodyText>
                 <Number number={selectedNum} />
-                <Button 
-                    title="start game"
-                    color="#f7287b"
-                    onPress={() => props.onStartGame(selectedNum)}/>
+                <FlatButton 
+                    text="start game"
+                    onPress={() => props.onStartGame(selectedNum)}
+                    style={{backgroundColor:"#f7287b"}}/>
             </Card>
         );
     }
@@ -64,6 +67,7 @@ const StartGameScreen = (props) => {
         <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
             <View style={styles.screen}>
                 <Text style={styles.title}>Start new Game</Text>
+                <Ionicons name="logo-game-controller-b" size={100} color="#f7287b"/>
                 <Card style={styles.inputContainer}>
                     <Text>Select a Number</Text>
                     <Input 
@@ -76,16 +80,18 @@ const StartGameScreen = (props) => {
                         value={enteredNum}/>
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                            <Button 
-                                title="reset"  
-                                color="#F54052" 
-                                onPress={resetInputHandler}/>
+                        <FlatButton 
+                            text="reset"
+                            onPress={resetInputHandler}
+                            style={{backgroundColor:"#F54052", padding: 10}}
+                            textStyles={{fontSize: 15}}/>
                         </View>
                         <View style={styles.button}>
-                            <Button 
-                                title="confirm" 
-                                color="#3EB5AD"
-                                onPress={confirmInputHandler}/>
+                        <FlatButton 
+                            text="confirm"
+                            onPress={confirmInputHandler}
+                            style={{backgroundColor:"#3EB5AD", padding: 10}}
+                            textStyles={{fontSize: 15}}/>
                         </View>
                     </View>
                 </Card>
@@ -113,7 +119,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        marginVertical: 10  
+        marginVertical: 10,
+        fontFamily: 'open-sans-bold'
     },
     button: {
         width: 110,

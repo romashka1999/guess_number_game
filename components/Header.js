@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import BodyText from '../components/BodyText';
 
 const Header = (props) => {
     return ( 
@@ -20,7 +21,8 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         color: 'black',
-        fontSize: 18
+        fontSize: 22,
+        fontFamily: 'open-sans-bold'
     }
 });
  
