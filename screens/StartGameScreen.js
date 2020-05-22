@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert, Dimensions} from 'react-native';
 import { Ionicons }from '@expo/vector-icons'
 
 import Card from '../components/Card';
@@ -80,18 +80,18 @@ const StartGameScreen = (props) => {
                         value={enteredNum}/>
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                        <FlatButton 
-                            text="reset"
-                            onPress={resetInputHandler}
-                            style={{backgroundColor:"#F54052", padding: 10}}
-                            textStyles={{fontSize: 15}}/>
+                            <FlatButton 
+                                text="reset"
+                                onPress={resetInputHandler}
+                                style={{backgroundColor:"#F54052", padding: 8}}
+                                textStyles={{fontSize: 15, textTransform:'capitalize'}}/>
                         </View>
                         <View style={styles.button}>
-                        <FlatButton 
-                            text="confirm"
-                            onPress={confirmInputHandler}
-                            style={{backgroundColor:"#3EB5AD", padding: 10}}
-                            textStyles={{fontSize: 15}}/>
+                            <FlatButton 
+                                text="confirm"
+                                onPress={confirmInputHandler}
+                                style={{backgroundColor:"#3EB5AD", padding: 8}}
+                                textStyles={{fontSize: 15, textTransform:'capitalize'}}/>
                         </View>
                     </View>
                 </Card>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-bold'
     },
     button: {
-        width: 110,
+        width: Dimensions.get('window').width / 4,
     },
     input: {
         width: 70,
